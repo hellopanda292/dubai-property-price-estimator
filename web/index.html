@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dubai Property Price Estimator · Priyanshu Zihowa</title>
+  <meta name="description" content="Estimate the price of an apartment or villa in Dubai with a machine-learning model trained on 2026 Dubai Land Department sales, plus a dashboard of the market." />
+  <meta name="theme-color" content="#f6f7fc" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232b59ff'/%3E%3Cstop offset='1' stop-color='%23d63c8f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M14 50V30l8-6v26M26 50V14l10 6v30M40 50V24l10 6v20' fill='none' stroke='white' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <a class="brand" href="https://priyanshu-zihowa.vercel.app">
+      <span class="brand-orb" aria-hidden="true"></span>
+      Priyanshu Zihowa
+    </a>
+    <a class="pill-link" href="https://github.com/hellopanda292/dubai-property-price-estimator" target="_blank" rel="noopener noreferrer">
+      View code on GitHub<span class="sr-only"> (opens in a new tab)</span>
+    </a>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Machine learning · Real estate · Dubai</p>
+      <h1>Dubai Property <em>Price Estimator</em></h1>
+      <p class="lead">
+        What is a fair price for an apartment or villa in Dubai? This model learned from
+        <strong id="lead-sales">100,000+</strong> real sales registered with the Dubai Land Department in 2026.
+      </p>
+      <ul class="stats" aria-label="Key numbers">
+        <li><strong id="stat-sales">–</strong> sales analysed</li>
+        <li><strong id="stat-value">–</strong> total value</li>
+        <li><strong id="stat-ppsf">–</strong> median per sq ft</li>
+        <li><strong id="stat-error">–</strong> median model error</li>
+      </ul>
+    </section>
+
+    <!-- Estimator -->
+    <section class="card estimator" aria-labelledby="est-title">
+      <div class="est-form">
+        <h2 id="est-title">Estimate a price</h2>
+        <form id="form" novalidate>
+          <label class="field">
+            <span>Area</span>
+            <select id="area" required></select>
+          </label>
+
+          <fieldset class="field">
+            <legend>Property type</legend>
+            <div class="seg" id="type">
+              <label><input type="radio" name="type" value="Flat" checked /><span>Apartment</span></label>
+              <label><input type="radio" name="type" value="Villa" /><span>Villa / townhouse</span></label>
+            </div>
+          </fieldset>
+
+          <div class="two">
+            <label class="field">
+              <span>Bedrooms</span>
+              <select id="bedrooms"></select>
+            </label>
+            <label class="field">
+              <span>Size</span>
+              <div class="size-row">
+                <input id="size" type="number" inputmode="numeric" min="1" step="10" value="750" aria-describedby="size-help" />
+                <div class="seg small" id="unit">
+                  <label><input type="radio" name="unit" value="sqft" checked /><span>sq ft</span></label>
+                  <label><input type="radio" name="unit" value="sqm" /><span>m²</span></label>
+                </div>
+              </div>
+            </label>
+          </div>
+          <p class="help" id="size-help"></p>
+
+          <fieldset class="field">
+            <legend>Status</legend>
+            <div class="seg" id="status">
+              <label><input type="radio" name="status" value="0" checked /><span>Ready</span></label>
+              <label><input type="radio" name="status" value="1" /><span>Off-plan</span></label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="est-result" aria-live="polite">
+        <p class="label">Estimated price</p>
+        <p class="price" id="price">–</p>
+        <p class="range" id="range"></p>
+        <div class="facts">
+          <div><span class="label">Per sq ft</span><strong id="ppsf">–</strong></div>
+          <div><span class="label">Area typical</span><strong id="area-ppsf">–</strong></div>
+          <div><span class="label">Sales in area</span><strong id="area-sales">–</strong></div>
+        </div>
+        <p class="compare" id="compare"></p>
+        <p class="warn" id="warn" hidden></p>
+        <p class="disclaimer">An estimate from past sales, not a valuation or financial advice.</p>
+      </div>
+    </section>
+
+    <!-- Market dashboard -->
+    <section class="section" aria-labelledby="market-title">
+      <h2 id="market-title">The 2026 market so far</h2>
+      <p class="muted" id="period"></p>
+      <div class="grid-2">
+        <div class="card chart-card">
+          <h3>Sales per month</h3>
+          <div class="chart-box"><canvas id="c-monthly" aria-label="Bar chart of flat and villa sales per month"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h3>Median price per sq ft (AED)</h3>
+          <div class="chart-box"><canvas id="c-ppsf" aria-label="Line chart of median price per square foot per month"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h3>Most expensive areas <span class="muted">AED / sq ft</span></h3>
+          <div class="chart-box tall"><canvas id="c-expensive" aria-label="Bar chart of the most expensive areas"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h3>Most affordable areas <span class="muted">AED / sq ft</span></h3>
+          <div class="chart-box tall"><canvas id="c-affordable" aria-label="Bar chart of the most affordable areas"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h3>Busiest areas <span class="muted">number of sales</span></h3>
+          <div class="chart-box tall"><canvas id="c-busy" aria-label="Bar chart of areas with the most sales"></canvas></div>
+        </div>
+        <div class="card chart-card">
+          <h3>Typical apartment price by bedrooms</h3>
+          <div class="chart-box tall"><canvas id="c-bed" aria-label="Bar chart of median apartment price by bedrooms"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Model -->
+    <section class="section" aria-labelledby="model-title">
+      <h2 id="model-title">How accurate is it?</h2>
+      <p class="muted" id="model-intro">The model learned from January–August sales and was tested on September–October sales it had never seen.</p>
+      <div class="grid-2">
+        <div class="card">
+          <table class="results">
+            <thead><tr><th scope="col">Method</th><th scope="col">Median error</th><th scope="col">Within 10%</th><th scope="col">Within 20%</th></tr></thead>
+            <tbody id="results"></tbody>
+          </table>
+          <p class="muted small">Median error: half of the test sales were predicted closer than this. A simple baseline ("area's typical price per sq ft × size") is shown for comparison.</p>
+        </div>
+        <div class="card chart-card">
+          <h3>What drives the price <span class="muted">permutation importance</span></h3>
+          <div class="chart-box"><canvas id="c-importance" aria-label="Bar chart of feature importance"></canvas></div>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li><span class="num">1</span><h3>Clean real data</h3><p>Official Dubai Land Department transactions. Removed gifts, lease-to-own and bulk developer registrations, impossible sizes and extreme prices.</p></li>
+        <li><span class="num">2</span><h3>Gradient boosting</h3><p>400 small decision trees (scikit-learn) predict the price per sq ft from area, type, bedrooms, size and off-plan status. Areas are encoded by their typical price.</p></li>
+        <li><span class="num">3</span><h3>Runs in your browser</h3><p>The trees are exported to JSON and evaluated by a few lines of JavaScript, so estimates are instant and nothing is sent to a server.</p></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Built by <a href="https://priyanshu-zihowa.vercel.app">Priyanshu Zihowa</a> · Built with Claude Code</p>
+    <p class="muted small">Data: Dubai Land Department, <a href="https://dubailand.gov.ae/en/open-data/real-estate-data/" target="_blank" rel="noopener noreferrer">Real Estate Data</a> (open data). This is an independent student project, not affiliated with DLD. Estimates are not valuations or financial advice.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

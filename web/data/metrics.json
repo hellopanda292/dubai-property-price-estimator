@@ -1,0 +1,54 @@
+{
+ "test_period": "Sep\u2013Oct 2026",
+ "train_period": "Jan\u2013Aug 2026",
+ "train_sales": 92265,
+ "test_sales": 13721,
+ "results": [
+  {
+   "model": "Baseline: area median \u00d7 size",
+   "median % error": "11.1%",
+   "within 10%": "46%",
+   "within 20%": "71%",
+   "R\u00b2 (log price)": 0.883
+  },
+  {
+   "model": "Gradient boosting",
+   "median % error": "8.3%",
+   "within 10%": "57%",
+   "within 20%": "83%",
+   "R\u00b2 (log price)": 0.934
+  }
+ ],
+ "by_type": [
+  {
+   "model": "Flats",
+   "median % error": "8.3%",
+   "within 10%": "56%",
+   "within 20%": "83%",
+   "R\u00b2 (log price)": 0.922,
+   "sales": 12714
+  },
+  {
+   "model": "Villas",
+   "median % error": "8.1%",
+   "within 10%": "59%",
+   "within 20%": "85%",
+   "R\u00b2 (log price)": 0.867,
+   "sales": 1007
+  }
+ ],
+ "band": {
+  "low": 0.8166237293982349,
+  "high": 1.182565090117346
+ },
+ "min_area_sales": 25,
+ "importance": {
+  "Flat or villa": 0.0117,
+  "Area activity": 0.05,
+  "Area (overall)": 0.1322,
+  "Off-plan / ready": 0.1572,
+  "Bedrooms": 0.2839,
+  "Size": 0.8213,
+  "Area (for this type)": 0.8383
+ }
+}

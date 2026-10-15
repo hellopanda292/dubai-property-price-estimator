@@ -1,0 +1,224 @@
+{
+ "period": "01 Jan \u2013 15 Oct 2026",
+ "updated": "2026-10-15",
+ "total_sales": 105986,
+ "total_value": 197825027627.44,
+ "median_ppsf": 1728,
+ "offplan_share": 0.758,
+ "by_type": {
+  "Flat": {
+   "sales": 96970,
+   "median_price": 1230068,
+   "median_ppsf": 1722
+  },
+  "Villa": {
+   "sales": 9016,
+   "median_price": 3416640,
+   "median_ppsf": 1772
+  }
+ },
+ "monthly": [
+  {
+   "month": "Jan",
+   "flats": 11882,
+   "villas": 2052,
+   "flat_ppsf": 1782,
+   "villa_ppsf": 1822
+  },
+  {
+   "month": "Feb",
+   "flats": 12356,
+   "villas": 1495,
+   "flat_ppsf": 1741,
+   "villa_ppsf": 1822
+  },
+  {
+   "month": "Mar",
+   "flats": 10228,
+   "villas": 1195,
+   "flat_ppsf": 1747,
+   "villa_ppsf": 1749
+  },
+  {
+   "month": "Apr",
+   "flats": 10712,
+   "villas": 940,
+   "flat_ppsf": 1848,
+   "villa_ppsf": 1871
+  },
+  {
+   "month": "May",
+   "flats": 7873,
+   "villas": 462,
+   "flat_ppsf": 1671,
+   "villa_ppsf": 1776
+  },
+  {
+   "month": "Jun",
+   "flats": 10812,
+   "villas": 629,
+   "flat_ppsf": 1712,
+   "villa_ppsf": 1621
+  },
+  {
+   "month": "Jul",
+   "flats": 11068,
+   "villas": 640,
+   "flat_ppsf": 1711,
+   "villa_ppsf": 1564
+  },
+  {
+   "month": "Aug",
+   "flats": 9325,
+   "villas": 596,
+   "flat_ppsf": 1708,
+   "villa_ppsf": 1603
+  },
+  {
+   "month": "Sep",
+   "flats": 8445,
+   "villas": 625,
+   "flat_ppsf": 1684,
+   "villa_ppsf": 1604
+  },
+  {
+   "month": "Oct",
+   "flats": 4269,
+   "villas": 382,
+   "flat_ppsf": 1671,
+   "villa_ppsf": 1666
+  }
+ ],
+ "top_areas": [
+  {
+   "area": "Madinat Al Mataar",
+   "sales": 12227
+  },
+  {
+   "area": "Jumeirah Village Circle",
+   "sales": 7620
+  },
+  {
+   "area": "Dubai Land Residence Complex",
+   "sales": 4888
+  },
+  {
+   "area": "Majan",
+   "sales": 4141
+  },
+  {
+   "area": "Business Bay",
+   "sales": 3618
+  },
+  {
+   "area": "Al Yelayiss 1",
+   "sales": 3497
+  },
+  {
+   "area": "Palm Deira",
+   "sales": 3354
+  },
+  {
+   "area": "City of Arabia",
+   "sales": 2604
+  },
+  {
+   "area": "Arjan",
+   "sales": 2536
+  },
+  {
+   "area": "Dubai Production City",
+   "sales": 2381
+  }
+ ],
+ "expensive": [
+  {
+   "area": "Business Park",
+   "ppsf": 3547
+  },
+  {
+   "area": "Palm Jabal Ali",
+   "ppsf": 3517
+  },
+  {
+   "area": "Al Wasl",
+   "ppsf": 3327
+  },
+  {
+   "area": "Dubai Maritime City",
+   "ppsf": 3242
+  },
+  {
+   "area": "Zaabeel Second",
+   "ppsf": 3154
+  },
+  {
+   "area": "Madinat Dubai Almelaheyah",
+   "ppsf": 2902
+  },
+  {
+   "area": "Bukadra",
+   "ppsf": 2900
+  },
+  {
+   "area": "DMCC-EZ2",
+   "ppsf": 2900
+  }
+ ],
+ "affordable": [
+  {
+   "area": "International City Ph 1",
+   "ppsf": 723
+  },
+  {
+   "area": "Discovery Gardens",
+   "ppsf": 961
+  },
+  {
+   "area": "Liwan",
+   "ppsf": 1106
+  },
+  {
+   "area": "International City Ph 2 & 3",
+   "ppsf": 1204
+  },
+  {
+   "area": "Dubai South",
+   "ppsf": 1252
+  },
+  {
+   "area": "Dubai Sports City",
+   "ppsf": 1297
+  },
+  {
+   "area": "Town Square",
+   "ppsf": 1324
+  },
+  {
+   "area": "Dubai Production City",
+   "ppsf": 1345
+  }
+ ],
+ "bedrooms": [
+  {
+   "label": "Studio",
+   "median_price": 677999
+  },
+  {
+   "label": "1 BR",
+   "median_price": 1251840
+  },
+  {
+   "label": "2 BR",
+   "median_price": 2208000
+  },
+  {
+   "label": "3 BR",
+   "median_price": 3800000
+  },
+  {
+   "label": "4+ BR",
+   "median_price": 8350000
+  }
+ ]
+}
